@@ -1,45 +1,40 @@
-import re
-def strcheck(x):
-    return re.findall(r"Test([\d.]*\d+)", x)
+def plusMinus(arr):
 
-arraybas = input("Please type how many number you will use (between 0 and 100):")
+    # To check 'n' number, does it comply with the condition.
+    while int(n) <= 0 or int(n) > 100:
+        return print("ops! Please Type a Number (from 1 to 100)")
 
-strcheck(arraybas)
+    # Created lists to fill with the numbers in arr.
+    positive_numbers = []
+    negative_numbers = []
+    zero_numbers = []
+    arr = list(arr)
 
-arraynumber = int(arraybas)
-
-
-posnum = []
-negnum = []
-zernum = []
-def plusMinus(x):
-    if x<0:
-       return negnum.append(x)
-    elif x>0:
-       return posnum.append(x)
-    else:
-       return  zernum.append(x)
-
-
-f = range(arraynumber)
-for x in f:
-    usernumber = input("Number (between -100 and 100):")
-    i=0
-    while i < 100:
+    # While loop to separate numbers and fill into list with append command.
+    i = 0
+    while i<n:
         i += 1
-        if int(usernumber)<-100 or int(usernumber)>100:
-            usernumber = input("Opps! Number Again (between -100 and 100):")
-
+        while int(arr[i-1]) < -100 or int(arr[i-1]) > 100:      # To check 'arr' numbers, does it comply with the condition.
+            return print("ops! Please a Type Number (from -100 to 100)")
+        if arr[i-1] < 0:
+           negative_numbers.append(arr[i-1])
+        elif arr[i-1] > 0:
+           positive_numbers.append(arr[i-1])
         else:
-            break
+           zero_numbers.append(arr[i-1])
 
+    # To illustrate numbers with 6 digits after decimal.
+    total_positive = "{:.6f}".format((len(positive_numbers))/n)
+    total_negative = "{:.6f}".format((len(negative_numbers))/n)
+    total_zero = "{:.6f}".format((len(zero_numbers))/n)
 
-    plusMinus(int(usernumber))
+    # Shows the results.
+    print(total_positive)
+    print(total_negative)
+    print(total_zero)
 
-print(posnum, negnum, zernum)
+if __name__ == '__main__':
+    n = int(input("n:").strip())
+    arr = map(int, input("arr:").rstrip().split())
 
-rspos = "{:.6f}".format((len(posnum))/arraynumber)
-rsneg = "{:.6f}".format((len(negnum))/arraynumber)
-rszer = "{:.6f}".format((len(zernum))/arraynumber)
-
-print(rspos,rsneg,rszer)
+plusMinus(arr)
